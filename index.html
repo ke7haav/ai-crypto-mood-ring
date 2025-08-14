@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 AI Crypto Mood Ring</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-magic sparkle"></i>
+                    <h1>AI Crypto Mood Ring</h1>
+                    <span class="version-tag">v2.0</span>
+                </div>
+                <p class="subtitle">Intelligent crypto sentiment analysis powered by AI</p>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <!-- Left Panel: Mood Ring -->
+            <div class="mood-panel">
+                <div class="mood-ring-wrapper">
+                    <div class="mood-ring" id="moodRing">
+                        <div class="ring-glow"></div>
+                        <div class="ring-inner">
+                            <div class="mood-display">
+                                <div class="mood-emoji" id="moodEmoji">🔮</div>
+                                <div class="mood-text" id="moodText">Loading...</div>
+                                <div class="mood-stats">
+                                    <span class="change-value" id="changeValue">0%</span>
+                                    <span class="intensity-badge" id="intensityBadge">Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mood-description">
+                        <h3 id="moodTitle">Market Vibe Check</h3>
+                        <p id="moodDesc">Analyzing cosmic crypto energy...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Stats & Controls -->
+            <div class="info-panel">
+                <!-- Market Stats -->
+                <div class="stats-card">
+                    <h3><i class="fas fa-chart-line"></i> Market Pulse</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Volume</span>
+                            <span class="stat-value" id="totalVolume">$0B</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg Change</span>
+                            <span class="stat-value change" id="avgChange">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Fear & Greed</span>
+                            <span class="stat-value" id="fearGreed">50</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">AI Score</span>
+                            <span class="stat-value" id="aiScore">0.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Query Section -->
+                <div class="query-card">
+                    <h3><i class="fas fa-robot"></i> Ask AI Assistant</h3>
+                    <div class="query-input-wrapper">
+                        <input type="text" id="aiQuery" placeholder="What's Bitcoin's price? Show trending coins..." autocomplete="off" />
+                        <button id="askBtn" type="button" onclick="askAI()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="quick-questions">
+                        <button class="quick-btn" type="button" onclick="quickQuery('Bitcoin price')">₿ BTC Price</button>
+                        <button class="quick-btn" type="button" onclick="quickQuery('trending coins')">🔥 Trending</button>
+                        <button class="quick-btn" type="button" onclick="quickQuery('market overview')">📊 Market</button>
+                    </div>
+                    
+                    <div class="ai-response" id="aiResponse">
+                        <div class="response-placeholder">
+                            <i class="fas fa-robot"></i>
+                            <p>Ask me anything about crypto markets!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crypto Grid -->
+        <div class="crypto-section">
+            <h2><i class="fas fa-coins"></i> Live Crypto Data</h2>
+            <div class="crypto-grid" id="cryptoGrid">
+                <div class="crypto-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading crypto data...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn primary" type="button" onclick="refreshData()">
+                <i class="fas fa-sync-alt" id="refreshIcon"></i>
+                <span>Refresh Data</span>
+            </button>
+            <button class="action-btn secondary" type="button" onclick="shareResults()">
+                <i class="fab fa-twitter"></i>
+                <span>Share Mood</span>
+            </button>
+            <button class="action-btn accent" type="button" onclick="toggleAutoRefresh()" id="autoBtn">
+                <i class="fas fa-play"></i>
+                <span>Auto Refresh</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p><i class="fas fa-heart"></i> Built for #BuildwithCoinGecko Hackathon</p>
+                <div class="tech-badges">
+                    <span class="tech-badge">AI Powered</span>
+                    <span class="tech-badge">Real-time Data</span>
+                    <span class="tech-badge">CoinGecko API</span>
+                </div>
+                <p class="last-update">Last updated: <span id="lastUpdate">Never</span></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Debug Info (remove in production) -->
+    <script>
+        console.log('🚀 HTML loaded, checking elements...');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('aiQuery element:', document.getElementById('aiQuery'));
+            console.log('askBtn element:', document.getElementById('askBtn'));
+            console.log('aiResponse element:', document.getElementById('aiResponse'));
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
